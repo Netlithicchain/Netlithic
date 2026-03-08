@@ -1,27 +1,754 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-<title>Netlithic Protocol</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Netlithic</title>
+  <style>
+    :root {
+      --bg: #050b1a;
+      --bg-2: #08152d;
+      --panel: rgba(11, 24, 52, 0.72);
+      --line: rgba(116, 166, 255, 0.18);
+      --text: #eef4ff;
+      --muted: #9fb3d9;
+      --blue: #5ea2ff;
+      --blue-2: #2f7cf6;
+      --glow: rgba(94, 162, 255, 0.35);
+      --success: #8dd3ff;
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+      --radius: 24px;
+      --max: 1180px;
+    }
 
-<link rel="stylesheet" href="style.css">
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top, rgba(56, 130, 246, 0.18), transparent 28%),
+        radial-gradient(circle at 20% 20%, rgba(94, 162, 255, 0.14), transparent 25%),
+        linear-gradient(180deg, #040915 0%, #020611 100%);
+      overflow-x: hidden;
+    }
 
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      inset: auto;
+      width: 40vw;
+      height: 40vw;
+      filter: blur(100px);
+      z-index: -2;
+      opacity: 0.22;
+      pointer-events: none;
+    }
+
+    body::before {
+      top: -10vw;
+      left: -8vw;
+      background: #1f6dff;
+    }
+
+    body::after {
+      bottom: -15vw;
+      right: -10vw;
+      background: #113c8f;
+    }
+
+    .grid-overlay {
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: radial-gradient(circle at center, black 35%, transparent 85%);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: min(calc(100% - 40px), var(--max));
+      margin: 0 auto;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(18px);
+      background: rgba(4, 9, 21, 0.55);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .brand-mark {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(94,162,255,0.28), rgba(47,124,246,0.08));
+      border: 1px solid rgba(116, 166, 255, 0.3);
+      box-shadow: inset 0 0 24px rgba(94,162,255,0.12), 0 0 30px rgba(94,162,255,0.08);
+      color: var(--blue);
+      font-size: 1.05rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-cta {
+      padding: 12px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(116, 166, 255, 0.3);
+      background: linear-gradient(180deg, rgba(94,162,255,0.18), rgba(94,162,255,0.08));
+      box-shadow: 0 0 24px rgba(94,162,255,0.14);
+      font-weight: 600;
+    }
+
+    .hero {
+      padding: 72px 0 48px;
+    }
+
+    .hero-wrap {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 36px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(94,162,255,0.08);
+      border: 1px solid rgba(116,166,255,0.18);
+      color: var(--success);
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      margin: 0 0 16px;
+      font-size: clamp(2.8rem, 6vw, 5.3rem);
+      line-height: 0.96;
+      letter-spacing: -0.05em;
+      text-transform: uppercase;
+    }
+
+    .hero h1 span {
+      display: block;
+      background: linear-gradient(180deg, #f4f8ff 0%, #74a6ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      margin: 0 0 28px;
+      max-width: 650px;
+      color: var(--muted);
+      font-size: 1.08rem;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 52px;
+      padding: 0 22px;
+      border-radius: 16px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--blue), var(--blue-2));
+      color: white;
+      box-shadow: 0 10px 30px var(--glow);
+    }
+
+    .btn-secondary {
+      color: var(--text);
+      background: rgba(255,255,255,0.03);
+      border-color: rgba(255,255,255,0.1);
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      max-width: 680px;
+    }
+
+    .stat {
+      padding: 18px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: var(--shadow);
+    }
+
+    .stat strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1.2rem;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .hero-card {
+      position: relative;
+      padding: 28px;
+      border-radius: 30px;
+      background: linear-gradient(180deg, rgba(13, 26, 58, 0.9), rgba(8, 18, 39, 0.85));
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: -30% 0 auto;
+      height: 220px;
+      background: radial-gradient(circle, rgba(94,162,255,0.18), transparent 70%);
+      pointer-events: none;
+    }
+
+    .terminal {
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(3, 9, 24, 0.88);
+      overflow: hidden;
+    }
+
+    .terminal-top {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.02);
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.35);
+    }
+
+    .terminal-body {
+      padding: 20px;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 0.92rem;
+      color: #dce9ff;
+      line-height: 1.9;
+    }
+
+    .token { color: #79b0ff; }
+    .comment { color: #7f91b4; }
+    .good { color: #87ffc1; }
+
+    .floating-card {
+      margin-top: 18px;
+      padding: 18px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .pill {
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(94,162,255,0.08);
+      border: 1px solid rgba(116,166,255,0.12);
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .section {
+      padding: 38px 0;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 24px;
+      margin-bottom: 22px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      letter-spacing: -0.04em;
+    }
+
+    .section-head p {
+      margin: 0;
+      max-width: 560px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .feature {
+      position: relative;
+      padding: 26px;
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .feature::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(94,162,255,0.06), transparent 45%);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .feature:hover::after { opacity: 1; }
+
+    .feature-icon {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      border-radius: 18px;
+      background: rgba(94,162,255,0.1);
+      border: 1px solid rgba(116,166,255,0.16);
+      margin-bottom: 18px;
+      color: var(--blue);
+      font-weight: 800;
+    }
+
+    .feature h3 {
+      margin: 0 0 10px;
+      font-size: 1.15rem;
+    }
+
+    .feature p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .roadmap {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .phase {
+      padding: 24px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: var(--shadow);
+    }
+
+    .phase small {
+      display: inline-block;
+      margin-bottom: 12px;
+      color: var(--blue);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-weight: 700;
+    }
+
+    .phase h3 {
+      margin: 0 0 10px;
+      font-size: 1.05rem;
+    }
+
+    .phase p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 0.95rem;
+    }
+
+    .cta {
+      padding: 48px 0 80px;
+    }
+
+    .cta-box {
+      position: relative;
+      padding: 38px;
+      border-radius: 32px;
+      background: linear-gradient(135deg, rgba(94,162,255,0.14), rgba(8,21,45,0.92));
+      border: 1px solid rgba(116,166,255,0.18);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .cta-box::before {
+      content: "";
+      position: absolute;
+      inset: auto -10% -60% auto;
+      width: 340px;
+      height: 340px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(94,162,255,0.22), transparent 60%);
+      pointer-events: none;
+    }
+
+    .cta-box h2 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      letter-spacing: -0.04em;
+    }
+
+    .cta-box p {
+      margin: 0 0 22px;
+      max-width: 720px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .footer {
+      padding: 24px 0 40px;
+      color: var(--muted);
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1024px) {
+      .hero-wrap,
+      .feature-grid,
+      .roadmap {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .hero-wrap > :first-child {
+        grid-column: span 2;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 42px;
+      }
+
+      .hero-wrap,
+      .feature-grid,
+      .roadmap,
+      .hero-stats,
+      .floating-card {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-wrap > :first-child {
+        grid-column: span 1;
+      }
+
+      .section-head,
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .cta-box,
+      .hero-card,
+      .feature,
+      .phase {
+        padding: 24px;
+      }
+    }
+  </style>
 </head>
-
 <body>
+  <div class="grid-overlay"></div>
 
-<h1>NETLITHIC</h1>
+  <header class="nav">
+    <div class="container nav-inner">
+      <a href="#top" class="brand">
+        <div class="brand-mark">N</div>
+        <span>Netlithic</span>
+      </a>
 
-<p>
-A community governed blockchain designed to eliminate
-pump-and-dump manipulation and enable AI-native protocols.
-</p>
+      <nav class="nav-links">
+        <a href="#vision">Vision</a>
+        <a href="#features">Features</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="https://github.com/" target="_blank" rel="noreferrer" class="nav-cta">View GitHub</a>
+      </nav>
+    </div>
+  </header>
 
-<button onclick="window.location.href='https://github.com/ironnode951/netlithic'">
-View GitHub
-</button>
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-wrap">
+        <div class="reveal visible">
+          <div class="eyebrow">⚡ Community-governed. AI-native. Anti-manipulation by design.</div>
+          <h1>
+            The chain built to
+            <span>outgrow meme-cycle chaos.</span>
+          </h1>
+          <p>
+            Netlithic is a next-generation blockchain experiment focused on reducing pump-and-dump dynamics,
+            strengthening community governance, and laying the groundwork for AI-native protocols that can actually scale.
+          </p>
 
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="https://github.com/" target="_blank" rel="noreferrer">Explore the build</a>
+            <a class="btn btn-secondary" href="#features">See the vision</a>
+          </div>
+
+          <div class="hero-stats">
+            <div class="stat">
+              <strong>Fair launch direction</strong>
+              <span>Built around community-first design instead of hype-driven extraction.</span>
+            </div>
+            <div class="stat">
+              <strong>Governance focus</strong>
+              <span>Upgrades, treasury, and growth shaped by aligned participation.</span>
+            </div>
+            <div class="stat">
+              <strong>AI-native future</strong>
+              <span>Structured to support protocol tools and onchain agent coordination.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-card reveal">
+          <div class="terminal">
+            <div class="terminal-top">
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+            </div>
+            <div class="terminal-body">
+              <div><span class="comment">// Netlithic mission</span></div>
+              <div><span class="token">consensus</span>: community-aligned</div>
+              <div><span class="token">launch</span>: fair and transparent</div>
+              <div><span class="token">protection</span>: anti-whale incentives</div>
+              <div><span class="token">future</span>: AI-native infrastructure</div>
+              <div><span class="good">status</span>: building in public</div>
+            </div>
+          </div>
+
+          <div class="floating-card">
+            <div class="pill">Token design focused on healthier market behavior</div>
+            <div class="pill">Governance primitives for long-term alignment</div>
+            <div class="pill">Simple, strong launch story for community growth</div>
+            <div class="pill">Clean foundation for future protocol expansion</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="vision">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <h2>Built for conviction, not quick flips</h2>
+          </div>
+          <p>
+            Most launches reward timing games, insider exits, and attention spikes. Netlithic aims for the opposite:
+            a cleaner launch philosophy, stronger social trust, and a blockchain identity people can actually rally around.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="features">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <h2>Core pillars</h2>
+          </div>
+          <p>
+            A sharper landing page should explain what makes Netlithic different in seconds. These three pillars do that fast.
+          </p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature reveal">
+            <div class="feature-icon">01</div>
+            <h3>Anti-manipulation design</h3>
+            <p>
+              Structure incentives to reduce the usual short-term extraction patterns that destroy trust in early-stage communities.
+            </p>
+          </article>
+
+          <article class="feature reveal">
+            <div class="feature-icon">02</div>
+            <h3>Community-first governance</h3>
+            <p>
+              Use transparent decision-making and treasury logic so the project feels owned by its builders, not captured by insiders.
+            </p>
+          </article>
+
+          <article class="feature reveal">
+            <div class="feature-icon">03</div>
+            <h3>AI-native protocol path</h3>
+            <p>
+              Design the brand and architecture from day one for agent tooling, automation layers, and future onchain intelligence.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="roadmap">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <h2>Roadmap</h2>
+          </div>
+          <p>
+            Keep the message simple: launch the idea, grow the community, harden the mechanism, then expand into infrastructure.
+          </p>
+        </div>
+
+        <div class="roadmap">
+          <article class="phase reveal">
+            <small>Phase 01</small>
+            <h3>Identity + launch story</h3>
+            <p>Dial in the website, mission, socials, and public narrative so the brand feels premium from the start.</p>
+          </article>
+
+          <article class="phase reveal">
+            <small>Phase 02</small>
+            <h3>Community formation</h3>
+            <p>Bring early believers into Discord, GitHub, and governance conversations around the protocol direction.</p>
+          </article>
+
+          <article class="phase reveal">
+            <small>Phase 03</small>
+            <h3>Mechanism testing</h3>
+            <p>Model token behavior, anti-dump protections, and governance incentives before broad market exposure.</p>
+          </article>
+
+          <article class="phase reveal">
+            <small>Phase 04</small>
+            <h3>AI-native expansion</h3>
+            <p>Layer in agent tooling, automation, and protocol utilities that give the chain a long-term reason to exist.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="container">
+        <div class="cta-box reveal">
+          <h2>Build in public. Launch with intention.</h2>
+          <p>
+            Netlithic does not need to look like every other crypto landing page. It should feel clean, premium, and serious enough
+            that people immediately understand this is bigger than a meme coin splash screen.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="https://github.com/" target="_blank" rel="noreferrer">Open GitHub</a>
+            <a class="btn btn-secondary" href="#top">Back to top</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>© 2026 Netlithic. Community-built blockchain vision.</div>
+      <div>Designed for GitHub Pages deployment.</div>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.14 });
+
+    document.querySelectorAll('.reveal').forEach((el, index) => {
+      if (!el.classList.contains('visible')) {
+        el.style.transitionDelay = `${Math.min(index * 70, 280)}ms`;
+      }
+      observer.observe(el);
+    });
+  </script>
 </body>
-
 </html>
