@@ -151,22 +151,34 @@
       padding: 18px 0;
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 800;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-    }
+    .brand{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  font-weight:800;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+}
 
-    .brand-logo {
-      width: 40px;
-      height: 40px;
-      object-fit: contain;
-      filter: drop-shadow(0 0 12px rgba(94,162,255,0.2));
-      animation: logoPulse 3.8s ease-in-out infinite;
-    }
+.brand-logo{
+  width:42px;
+  height:42px;
+  object-fit:contain;
+  transition:all .35s ease;
+  filter:drop-shadow(0 0 10px rgba(94,162,255,0.35));
+}
+
+.brand:hover .brand-logo{
+  transform:rotate(6deg) scale(1.05);
+  filter:drop-shadow(0 0 18px rgba(94,162,255,0.6));
+}
+
+.brand-text{
+  font-size:1.15rem;
+  background:linear-gradient(180deg,#ffffff,#7fb2ff);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
 
     .nav-links {
       display: flex;
@@ -793,7 +805,7 @@
     <div class="container nav-inner">
       <a href="#top" class="brand">
         <img src="netlithic-icon.png" alt="Netlithic logo" class="brand-logo">
-        <span>NETLITHIC</span>
+        <span class="brand-text">NETLITHIC</span>
       </a>
 
       <nav class="nav-links">
