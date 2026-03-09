@@ -1,5 +1,10 @@
 # Netlithic
 
+Netlithic is a community-driven blockchain protocol designed for
+decentralized infrastructure and future AI-native applications.
+
+The project is open-source and governed by its community.
+
 **The AI-native blockchain owned by its contributors.**
 
 Netlithic is a decentralized blockchain protocol designed to reward the people who **build, secure, and grow the network**.
