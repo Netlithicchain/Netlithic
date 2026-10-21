@@ -1,74 +1,98 @@
-## Token
+# Netlithic Node Setup (Local Devnet)
 
-Ticker: **NLT**
+This guide covers what the current node software actually does: a local
+proof-of-work devnet (chain id `netlithic-dev-1`) with Ed25519-signed
+transfers and HTTP peer-to-peer sync. There is no public testnet yet, no
+staking, and no validator set.
 
-Utility includes:
+## 1. Requirements
 
-- transaction fees  
-- validator staking  
-- governance participation  
-- network services  
-- AI agent interactions  
+- Python 3.10 or newer
+- The `cryptography` package:
 
----
+```
+python -m pip install -r requirements.txt
+```
 
-## Token Distribution
+## 2. Create a wallet
 
-| Allocation | Percentage |
-|------------|------------|
-| Community Contribution Pool | 60% |
-| Validator Rewards | 20% |
-| Protocol Treasury | 15% |
-| Protocol Reserve | 5% |
+```
+python wallet.py
+```
 
-Ownership of the network is earned through **contribution instead of speculation**.
+This creates a new Ed25519 wallet, saves it to `wallets.json` in the
+current folder, and prints its address. The printed output includes the
+private key: do not paste it anywhere, and never share or commit
+`wallets.json` (it is listed in `.gitignore`).
 
----
+## 3. Start a node
 
-## Documentation
+```
+python p2p_http.py 8000
+```
 
-Protocol documentation is located in the `/docs` directory.
+- The first argument is the port (default `8000`). An optional second
+  argument is the host to bind (default `127.0.0.1`, local only).
+- `python node.py 8000` does the same thing; with no argument `node.py`
+  uses port `5000`.
+- On first start the node creates `chain.json` with the genesis block.
+  If `chain.json` exists but does not validate, the node stops with an
+  error instead of overwriting it.
 
-Available documentation includes:
+Check it is running:
 
-- Whitepaper  
-- Tokenomics  
-- Roadmap  
-- Ecosystem Map  
-- Genesis Information  
-- Node Setup Guide  
+```
+curl http://127.0.0.1:8000/status
+```
 
----
+## 4. Run a second node and connect them
 
-## Project Status
+There is no `--peer` flag. Start the second node, then tell it about the
+first one:
 
-Netlithic is currently in **early protocol development**.
+```
+python p2p_http.py 8001
+curl -X POST http://127.0.0.1:8001/add_peer -H "Content-Type: application/json" -d "{\"peer\": \"http://127.0.0.1:8000\"}"
+```
 
-Current focus:
+Peers are saved to `peers.json`, and nodes sync with each other every
+few seconds.
 
-• core blockchain implementation  
-• peer-to-peer networking  
-• validator architecture  
-• contribution reward mechanisms  
+> Run each node from its own folder. `chain.json`, `mempool.json`,
+> `peers.json` and `state_contributions.json` are read from the current
+> folder, so two nodes in one folder will share and overwrite these files.
 
-A public testnet will be introduced in a future development phase.
+## 5. Mine a block
 
----
+```
+curl -X POST http://127.0.0.1:8000/mine -H "Content-Type: application/json" -d "{\"miner_address\": \"<your address>\"}"
+```
 
-## Website
+Each block pays a fixed reward of 10 NLT to the miner. Difficulty starts
+at 3 and adjusts every 10 blocks.
 
-https://netlithicchain.com
+## 6. Check a balance and send a transfer
 
----
+```
+curl "http://127.0.0.1:8000/balance?address=<address>"
+python send_tx.py <from_address> <to_address> <amount> --node http://127.0.0.1:8000
+```
 
-## Project Activity
+`send_tx.py` signs with the sender's key from your local `wallets.json`.
+The transfer is confirmed once a block is mined.
 
-[![Star History Chart](https://api.star-history.com/svg?repos=netlithic/netlithic&type=Date)](https://star-history.com/#netlithic/netlithic&Date)
+## 7. Other endpoints
 
----
+- `GET /chain`, `GET /mempool`, `GET /peers`, `GET /status`
+- `GET /account?address=<address>` (balance and nonce)
+- `POST /sync` (pull the longest valid chain from peers now)
 
-## License
+## 8. Start over with a fresh chain
 
-Netlithic is released as open-source software under the **MIT License**.
+```
+python new_genesis.py --yes
+```
 
-© 2026 Netlithic Protocol
+This renames `chain.json`, `mempool.json` and `state_contributions.json`
+to `.bak` files and creates a fresh genesis chain. It does not touch
+`wallets.json` or `peers.json`. Every node must be reset the same way.
