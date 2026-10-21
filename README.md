@@ -19,11 +19,13 @@ Instead of prioritizing speculation, Netlithic distributes ownership through **P
 
 ## Core Principles
 
-• Fair Launch Distribution  
-• Proof of Contribution  
-• Anti-Pump-and-Dump Market Design  
-• Contributor-Owned Ecosystem  
-• AI-Native Infrastructure  
+• Proof of Contribution (early, local-only prototype)  
+• Contributor-Owned Ecosystem (goal)  
+• AI-Native Infrastructure (future direction)  
+
+Today the devnet uses proof-of-work with a fixed 10 NLT block reward, no
+supply cap and no pre-mine. See [Tokenomics](docs/Tokenomics.md) for what is
+implemented and what is only proposed.
 
 ---
 
@@ -38,7 +40,7 @@ The protocol is designed to support:
 - validator security networks
 - autonomous AI agents
 
-Value flows to the participants who **create value for the network**.
+The goal is for network ownership to be earned by the people who build and run it.
 
 ---
 

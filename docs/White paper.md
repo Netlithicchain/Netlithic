@@ -26,7 +26,7 @@ The protocol is designed to support:
 • open developer ecosystems
 • community-driven governance
 
-In this model, value flows to participants who actively contribute to the network's growth.
+In this model, network ownership is earned by participants who contribute.
 
 3. Design Principles
 
@@ -58,7 +58,7 @@ The Netlithic protocol consists of four primary participant roles.
 
 Validators
 
-Validators secure the network and produce blocks. Validators stake tokens and receive block rewards for maintaining network integrity.
+Validators secure the network and produce blocks. In the future design, validators would stake tokens and receive block rewards. Today the devnet uses proof-of-work miners and has no staking.
 
 Developers
 
@@ -86,75 +86,35 @@ The token serves several core functions within the ecosystem:
 
 6. Token Distribution
 
-## Token Distribution
+Current devnet: proof-of-work, a fixed reward of 10 NLT per block, no supply
+cap, no pre-mine and no allocations. Devnet NLT is for testing only.
 
-The Netlithic token supply is structured to prioritize community ownership, network security, and long-term ecosystem sustainability.
-
-**Distribution Model**
-
-| Allocation | Percentage |
-|-----------|-----------|
-| Community Contribution Pool | 60% |
-| Validator Rewards | 20% |
-| Protocol Treasury | 15% |
-| Protocol Reserve | 5% |
-
-**Community (60%)**  
-Allocated to ecosystem incentives, developer grants, and community participation to ensure decentralized network ownership.
-
-**Validators (20%)**  
-Distributed through block rewards and staking incentives to secure the network and support validator participation.
-
-**Treasury (15%)**  
-Supports long-term development including infrastructure, grants, security audits, and ecosystem growth.
-
-**Reserve (5%)**  
-Maintained as a protocol stabilization fund for emergencies and governance-approved initiatives.
-
-Tokens are distributed gradually over time through participation, validator operation, and ecosystem contribution.
+Proposed future design (not implemented): a fixed supply of 1,000,000,000
+NLT split 60% community contribution pool, 20% validator rewards, 15%
+protocol treasury and 5% protocol reserve. This is a proposal and may change.
+See docs/Tokenomics.md.
 
 7. Proof of Contribution
 
-Proof of Contribution (PoC) is the core distribution mechanism for Netlithic.
+Proof of Contribution (PoC) is the intended distribution mechanism for
+Netlithic: tokens would go to people who measurably contribute, for example
+by running nodes, developing software, reporting security issues or writing
+documentation.
 
-Instead of allocating the majority of tokens to early investors, the protocol distributes tokens to participants who actively contribute to the network.
+Today this exists only as a local prototype: each node counts contribution
+points (10 per mined block, 1 per sent transaction) in a local file. The
+points are not on-chain and cannot be exchanged for tokens.
 
-Examples of measurable contributions include:
+8. Fair Distribution
 
-• running validator nodes
-• developing software or tools
-• identifying security vulnerabilities
-• producing educational content
-• supporting ecosystem growth
+The aim is to avoid early concentration by insiders or bots. No launch or
+distribution mechanism has been designed or implemented yet, and there is
+no token sale.
 
-Contributors receive contribution credits that can be exchanged for protocol tokens.
+9. Long-Term Participation
 
-This mechanism aligns network ownership with those who actively build and maintain the ecosystem.
-
-8. Fair Launch Mechanism
-
-Netlithic introduces mechanisms to discourage early market manipulation and speculative volatility.
-
-Liquidity Bootstrap Launch
-
-Instead of launching tokens at a fixed price, Netlithic uses a liquidity bootstrap auction that allows the market to gradually discover the token's value.
-
-Price begins at a high level and gradually decreases until buyers enter the market.
-
-This prevents automated trading bots from dominating the early distribution.
-
-9. Anti-Manipulation Market Design
-
-The protocol includes mechanisms to discourage rapid speculative trading and pump-and-dump cycles.
-
-These may include:
-
-• time-weighted selling limits
-• progressive exit fees that decrease over time
-• anti-sniping launch protections
-• liquidity stability mechanisms
-
-These features help encourage long-term participation rather than short-term speculation.
+Future protocol rules may encourage long-term participation over
+short-term speculation. No such mechanisms exist today.
 
 10. Governance
 
@@ -189,7 +149,7 @@ Treasury resources may support:
 • ecosystem infrastructure
 • research initiatives
 
-Treasury activity is transparent and verifiable on-chain.
+No treasury exists yet. The intent is for treasury activity to be visible on-chain once it does.
 
 12. AI-Native Infrastructure
 
@@ -202,7 +162,7 @@ AI agents may:
 • analyze governance proposals
 • detect network vulnerabilities
 
-Agents may earn tokens through useful contributions, creating a hybrid human-AI decentralized economy.
+In the future, agents could be rewarded for useful contributions. This is not implemented.
 
 13. Security
 

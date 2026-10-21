@@ -1,131 +1,52 @@
 # Netlithic Tokenomics
 
-## Overview
+> Status: experimental devnet. NLT has no market, no price and no sale.
+> Nothing in this document is an offer or a promise of any return.
 
-Netlithic is designed as a **community-first blockchain protocol** focused on decentralized infrastructure and future AI-native applications.
+## What the devnet does today
 
-The token model prioritizes:
+These are the rules the current node software actually enforces:
 
-- decentralization
-- validator security
-- long-term sustainability
-- ecosystem development
+- **Consensus:** proof-of-work. Difficulty starts at 3 and adjusts every 10 blocks.
+- **Issuance:** each mined block pays the miner a fixed **10 NLT** reward.
+- **No supply cap:** issuance continues for as long as blocks are mined.
+  There is no maximum supply and no halving yet.
+- **No pre-mine:** the genesis block contains no transactions. Every NLT on
+  the devnet was created by mining.
+- **No allocations:** there is no community pool, validator pool, treasury
+  or reserve in the code today.
+- **Transfers:** Ed25519-signed transactions with nonces, on chain id
+  `netlithic-dev-1`.
+- **Contribution points:** each node keeps a local counter in
+  `state_contributions.json` (10 points per mined block, 1 per sent
+  transaction). These points are not on-chain, are not agreed between
+  nodes, and cannot be exchanged for NLT.
 
-Total Supply is **fixed** at:
+Devnet NLT is for testing only and may be reset at any time
+(see `new_genesis.py`).
 
-1,000,000,000 NLT
+## Proposed future design (not implemented)
 
-No additional tokens will ever be minted.
+The following is a design proposal for discussion. None of it exists in
+the code yet, and any of it may change.
 
----
+- A fixed total supply of 1,000,000,000 NLT.
+- A proposed split of that supply:
 
-# Token Distribution
-
-| Category | Allocation | Tokens |
+| Category | Share | Tokens |
 |--------|--------|--------|
-| Community | 60% | 600,000,000 |
-| Validators | 20% | 200,000,000 |
-| Treasury | 15% | 150,000,000 |
-| Protocol Reserve | 5% | 50,000,000 |
+| Community contribution pool | 60% | 600,000,000 |
+| Validator rewards | 20% | 200,000,000 |
+| Protocol treasury | 15% | 150,000,000 |
+| Protocol reserve | 5% | 50,000,000 |
 
----
+- **Community pool:** intended to reward measurable contributions such as
+  running nodes, writing code, reporting security issues and documentation.
+- **Validator rewards:** intended for a future validator system. Today the
+  devnet has miners, not validators, and there is no staking.
+- **Treasury and reserve:** intended for development, grants and security
+  audits, with spending decided through a future governance process that
+  has not been designed yet.
 
-# Community Allocation (60%)
-
-Community distribution ensures the network remains **decentralized and community owned**.
-
-These tokens are distributed through ecosystem participation.
-
-### Allocation Uses
-
-- Community incentives
-- Ecosystem growth
-- Developer grants
-- Liquidity incentives
-- Network adoption programs
-
-### Example Distribution
-
-| Category | Tokens |
-|--------|--------|
-| Community rewards | 300,000,000 |
-| Ecosystem incentives | 100,000,000 |
-| Developer grants | 100,000,000 |
-| Liquidity incentives | 100,000,000 |
-
----
-
-# Validator Allocation (20%)
-
-Validators secure the Netlithic network by:
-
-- validating transactions
-- producing blocks
-- maintaining network consensus
-
-Validator tokens are distributed gradually through **block rewards**.
-
-### Validator Incentives
-
-- staking rewards
-- block production rewards
-- network security incentives
-
-This ensures long-term validator participation and decentralization.
-
----
-
-# Treasury (15%)
-
-The Netlithic Treasury funds the continued development and growth of the ecosystem.
-
-Treasury spending is governed through **community governance mechanisms**.
-
-### Treasury Use Cases
-
-- developer grants
-- infrastructure funding
-- ecosystem partnerships
-- security audits
-- protocol research and development
-
-Treasury funds are intended to sustain the protocol for the long term.
-
----
-
-# Protocol Reserve (5%)
-
-The protocol reserve acts as a **network stabilization and emergency fund**.
-
-It may be used for:
-
-- liquidity support
-- emergency protocol needs
-- ecosystem stabilization
-- governance-approved initiatives
-
-The reserve helps ensure long-term network resilience.
-
----
-
-# Governance
-
-Over time, governance will transition toward a **community-driven model** where token holders can propose and vote on:
-
-- protocol upgrades
-- treasury allocations
-- ecosystem initiatives
-
-This ensures Netlithic evolves as a decentralized protocol guided by its community.
-
----
-
-# Long-Term Vision
-
-Netlithic aims to become a foundational infrastructure layer for:
-
-- decentralized applications
-- AI-native systems
-- distributed infrastructure networks
-
-The token model is designed to support sustainable ecosystem growth while maintaining decentralization and security.
+Moving from the devnet rules to this design would require a new chain or a
+documented change to issuance. That decision has not been made.
