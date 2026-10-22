@@ -930,6 +930,7 @@
           <a class="pill-link" href="/#status">Status</a>
           <a class="pill-link" href="/#roadmap">Roadmap</a>
           <a class="pill-link" href="/guides/">Guides</a>
+          <a class="pill-link" href="/devlog/">Dev log</a>
           <a class="button" href="https://x.com/netlithicchain" target="_blank" rel="noopener noreferrer">X</a>
           <a class="button primary" href="https://discord.gg/Mu5r62GExn" target="_blank" rel="noopener noreferrer">Join Discord</a>
         </div>
@@ -937,6 +938,7 @@
     </div>
   </header>
   <main class="guide">
+<!-- NOT PUBLISHABLE until the installer is code-signed. Founder's OK needed. -->
 <div class="crumbs"><a href="/guides/">Guides</a> / Guide 6 of 8</div>
 <h1>Help run the network with the desktop app <span class="soon">Coming soon</span></h1>
 <blockquote>
@@ -948,16 +950,23 @@
 <ul>
 <li>It runs your own copy of the record on your PC, kept up to date with the network.</li>
 <li>It has the same wallet screens and backup code as the web wallet.</li>
-<li>On the <strong>Help run the network</strong> card, press the button labeled "Start earning" to help run the network. While it is on, your computer helps make new blocks. The network gives 10 test coins (no value) to your wallet for each block your computer helps make.</li>
+<li>On the <strong>Help run the network</strong> card, press the button labeled "Start helping". While it is on, your computer helps make new blocks. Each block it makes adds 10 test coins (no value) to your wallet.</li>
 <li>It shows <strong>Blocks found by this computer</strong>.</li>
 </ul>
 <p>Your wallet's secret key stays inside the app on your PC, locked with your password.</p>
 <h2>Installing (when it's released)</h2>
 <ol>
-<li>Run <strong>Netlithic-Setup.exe</strong>.</li>
-<li>Windows may say <strong>"Windows protected your PC."</strong> This is because the installer isn't signed yet. Signing is a digital stamp that tells Windows who made the app. Click <strong>More info</strong>, then <strong>Run anyway</strong>.</li>
-<li>Open Netlithic. Create a wallet, or bring back yours with your backup code.</li>
-<li>Press the button labeled "Start earning" to start helping. Press "Stop earning" to stop any time.</li>
+<li>Download <strong>Netlithic-Setup.exe</strong> only from <strong>testnet.netlithicchain.com</strong> or the official Netlithic GitHub release. Never from anywhere else.</li>
+<li>Check the file is the real one. Next to the download is a <strong>checksum</strong> (a long code made of letters and numbers). On Windows:
+<ul>
+<li>Open the <strong>Start</strong> menu, type <strong>cmd</strong>, and open <strong>Command Prompt</strong>.</li>
+<li>Type <code>cd Downloads</code> and press Enter.</li>
+<li>Type <code>certutil -hashfile Netlithic-Setup.exe SHA256</code> and press Enter.</li>
+<li>Compare the long code it shows with the checksum on the download page. They must match exactly.</li>
+</ul></li>
+<li><strong>If Windows warns you, or the checksum doesn't match, don't run it. Tell us.</strong></li>
+<li>Run <strong>Netlithic-Setup.exe</strong>, then open Netlithic. Create a wallet, or bring back yours with your backup code.</li>
+<li>Press the button labeled "Start helping". Press "Stop helping" to stop any time.</li>
 </ol>
 <h2>Why are my points 0?</h2>
 <p>Blocks with no transfers in them don't earn points. See <a href="/guides/07-contribution-points/">contribution points</a>.</p>
@@ -977,6 +986,7 @@
           <a href="/#status">Status</a>
           <a href="/#roadmap">Roadmap</a>
           <a href="/guides/">Guides</a>
+          <a href="/devlog/">Dev log</a>
           <a href="https://discord.gg/Mu5r62GExn" target="_blank" rel="noopener noreferrer">Discord</a>
           <a href="https://x.com/netlithicchain" target="_blank" rel="noopener noreferrer">X</a>
           <a href="https://github.com/Netlithicchain/Netlithic/tree/main/docs" target="_blank" rel="noopener noreferrer">Docs</a>
