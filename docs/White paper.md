@@ -4,7 +4,7 @@ Blockchain technology has transformed digital ownership and decentralized coordi
 
 • Concentrated token ownership
 • Pump-and-dump market behavior
-• Early investor dominance
+• Early insider dominance
 • Limited real economic participation
 
 These issues weaken decentralization and limit long-term network growth.
@@ -13,7 +13,7 @@ Netlithic introduces a new model designed to align incentives between developers
 
 The core philosophy behind Netlithic is simple:
 
-Ownership of the network should be earned through contribution rather than speculation.
+NLT is earned through measurable contributions and used to secure and govern the network.
 
 2. Vision
 
@@ -26,7 +26,7 @@ The protocol is designed to support:
 • open developer ecosystems
 • community-driven governance
 
-In this model, network ownership is earned by participants who contribute.
+In this model, NLT is earned through measurable contributions and used to secure and govern the network.
 
 3. Design Principles
 
@@ -36,9 +36,9 @@ Netlithic is built on five foundational principles.
 
 Token distribution mechanisms are designed to prevent early centralization by insiders or automated trading bots.
 
-3.2 Contribution-Based Ownership
+3.2 Contribution-Based Rewards
 
-Participants earn network ownership through measurable contributions rather than speculative purchasing.
+NLT is earned through measurable contributions and used to secure and govern the network.
 
 3.3 Economic Stability
 
@@ -108,8 +108,7 @@ points are not on-chain and cannot be exchanged for tokens.
 8. Fair Distribution
 
 The aim is to avoid early concentration by insiders or bots. No launch or
-distribution mechanism has been designed or implemented yet, and there is
-no token sale.
+distribution mechanism has been designed or implemented yet.
 
 9. Long-Term Participation
 
@@ -174,7 +173,7 @@ This incentive model encourages honest behavior and network reliability.
 
 14. Regulatory Philosophy
 
-Netlithic is designed as decentralized infrastructure rather than an investment instrument.
+Netlithic is designed as decentralized infrastructure rather than an investment instrument. NLT confers no equity, profit share, dividend or claim on any entity.
 
 The protocol prioritizes:
 
@@ -205,6 +204,6 @@ AI agent infrastructure and ecosystem expansion
 
 Netlithic represents a new model for blockchain networks that prioritizes fairness, contribution, and decentralized innovation.
 
-By aligning ownership with active participation and introducing economic mechanisms designed to discourage speculative manipulation, the protocol aims to build a sustainable foundation for decentralized applications and autonomous digital intelligence.
+By aligning rewards and governance with active participation and introducing economic mechanisms designed to discourage speculative manipulation, the protocol aims to build a sustainable foundation for decentralized applications and autonomous digital intelligence.
 
 Netlithic seeks to become the infrastructure layer where contributors, developers, and intelligent agents collaboratively build the decentralized systems of the future.

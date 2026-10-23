@@ -7,20 +7,20 @@
 
 # Netlithic
 
-**The AI-native blockchain owned by its contributors.**
+**The AI-native blockchain run by its contributors.**
 
 Netlithic is a community-driven blockchain protocol designed for decentralized infrastructure and future AI-native applications.
 
 The network is open source and governed by its contributors.
 
-Instead of prioritizing speculation, Netlithic distributes ownership through **Proof of Contribution**, allowing developers, validators, and community members to earn their share of the network.
+Instead of prioritizing speculation, Netlithic distributes NLT through **Proof of Contribution**, allowing developers, validators, and community members to earn NLT for running and improving the network.
 
 ---
 
 ## Core Principles
 
 • Proof of Contribution (early, local-only prototype)  
-• Contributor-Owned Ecosystem (goal)  
+• Contributor-Run Ecosystem (goal)  
 • AI-Native Infrastructure (future direction)  
 
 Today the devnet uses proof-of-work with a fixed 10 NLT block reward, no
@@ -36,11 +36,11 @@ Netlithic aims to become the **foundation layer for decentralized intelligence**
 The protocol is designed to support:
 
 - decentralized applications
-- contributor-owned ecosystems
+- contributor-run ecosystems
 - validator security networks
 - autonomous AI agents
 
-The goal is for network ownership to be earned by the people who build and run it.
+The goal is for NLT to be earned by the people who build and run it.
 
 ---
 

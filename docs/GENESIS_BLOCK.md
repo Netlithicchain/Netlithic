@@ -20,7 +20,7 @@ no insider token allocations outside the published tokenomics.
 
 Genesis Principles
 • Fair access to network participation
-• Contribution-based ownership
+• Contribution-based rewards
 • Transparent protocol design
 • Open-source infrastructure
 

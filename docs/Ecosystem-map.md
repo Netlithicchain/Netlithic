@@ -2,7 +2,7 @@
 
 ## Overview
 
-Netlithic is an AI-native, contributor-owned blockchain ecosystem intended to be owned by the builders, node operators, users, and (in the future) autonomous agents who contribute to it. Most of this map describes planned components that are not implemented yet.
+Netlithic is an AI-native, contributor-run blockchain ecosystem intended to be run by the builders, node operators, users, and (in the future) autonomous agents who contribute to it. Most of this map describes planned components that are not implemented yet.
 
 ```mermaid
 flowchart TD

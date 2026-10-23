@@ -1,6 +1,6 @@
 # Netlithic Tokenomics
 
-> Status: experimental devnet. NLT has no market, no price and no sale.
+> Status: experimental devnet. NLT is a devnet test token with no market and no price.
 > Nothing in this document is an offer or a promise of any return.
 
 ## What the devnet does today
