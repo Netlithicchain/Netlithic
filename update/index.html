@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Required network update | Netlithic</title>
-  <meta name="description" content="Every node and miner must update before testnet block 5000 to stay on the network." />
+  <title>Required update: 0.5.0 | Netlithic</title>
+  <meta name="description" content="Update to 0.5.0 before testnet block 4900. The upgrade takes effect at block 5000." />
   <link rel="canonical" href="https://netlithicchain.com/update/" />
   <meta property="og:title" content="Required network update | Netlithic" />
-  <meta property="og:description" content="Every node and miner must update before testnet block 5000 to stay on the network." />
+  <meta property="og:description" content="Update to 0.5.0 before testnet block 4900. The upgrade takes effect at block 5000." />
   <meta property="og:url" content="https://netlithicchain.com/update/" />
   <meta property="og:image" content="https://netlithicchain.com/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -908,7 +908,6 @@
 .guide ol.cards{list-style:none;padding:0;display:grid;gap:14px}.guide ol.cards a{display:block;padding:18px 22px;border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--panel);text-decoration:none;color:var(--text);font-weight:600}
 .guide ol.cards a:hover{border-color:var(--line-strong)}.guide ol.cards span{color:var(--muted);font-weight:400;margin-right:10px}
 .soon{display:inline-block;font-size:13px;padding:2px 10px;border-radius:999px;border:1px solid var(--violet);color:var(--violet);margin-left:8px;vertical-align:middle}
-.ph{background:#ffe600;color:#000;padding:1px 6px;border-radius:4px;font-weight:700;outline:2px dashed #ff6a00}
 </style>
 </head>
 <body>
@@ -939,28 +938,29 @@
     </div>
   </header>
   <main class="guide">
-<h1>Required network update</h1>
+<h1>Required network update: 0.5.0</h1>
 <blockquote>
-<p><strong>Every node and miner must update before testnet block 5000 to stay on the network.</strong> Nodes that don't update will split off from the network.</p>
+<p><strong>Update to 0.5.0 before block 4900. The upgrade takes effect at block 5000.</strong></p>
+<p>From block 4900, 0.5.0 nodes stop syncing with older versions, so nodes that haven't updated by then fall off the network.</p>
 </blockquote>
 <h2>Why</h2>
 <p>This update strengthens Netlithic against attacks: it limits how far back the chain can be rewritten, makes contribution points harder to game, and protects nodes from being flooded with requests.</p>
-<p>The update brings security hardening and the payout rules that start at block 5000:</p>
-<ul>
-<li>Community reward payouts are being finalized, and the schedule will be confirmed with the release.</li>
-<li>Steadier block timing.</li>
-</ul>
-<h2>When</h2>
-<p>The update will be announced here and in Discord #announcements the day it ships. You can watch the live block count on the explorer: <a href="https://testnet.netlithicchain.com/explorer/">https://testnet.netlithicchain.com/explorer/</a>.</p>
-<h2>How to update</h2>
-<p><span class="ph">[steps coming from Builder]</span></p>
+<h2>How to update (running from code)</h2>
+<ol>
+<li>Stop your node.</li>
+<li>Run <code>git fetch --tags &amp;&amp; git checkout v0.5.0</code> (or download the release from <a href="https://github.com/Netlithicchain/netlithic-core/releases/tag/v0.5.0">https://github.com/Netlithicchain/netlithic-core/releases/tag/v0.5.0</a>).</li>
+<li>Run <code>pip install -r requirements.txt</code>.</li>
+<li>Keep your data folder.</li>
+<li>Use public peer addresses only. 0.5.0 skips local ones like <code>127.0.0.1</code> and <code>192.168.x.x</code>.</li>
+<li>Start your node.</li>
+</ol>
 <h2>Check your version</h2>
-<p><span class="ph">[steps coming from Builder]</span></p>
-<p>You need <span class="ph">[version]</span> or newer.</p>
-<h2>Desktop app note</h2>
-<p>The desktop app is still coming soon.</p>
+<p>Open <code>http://&lt;your-node&gt;:8000/status</code>. You should see <code>"version": "0.5.0"</code> and a height that matches the explorer (<a href="https://testnet.netlithicchain.com/explorer/">https://testnet.netlithicchain.com/explorer/</a>) and keeps rising.</p>
+<p>If something goes wrong, the old version is safe to run until block 4900.</p>
+<h2>Desktop app</h2>
+<p>Desktop app 0.5.0: <span class="soon">coming soon</span></p>
 <p>This is a test network, and test coins have no value.</p>
-  </main>
+</main>
   <footer>
     <div class="container">
       <div class="footer-inner">
