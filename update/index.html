@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Required update: 0.5.0 | Netlithic</title>
-  <meta name="description" content="Update to 0.5.0 before testnet block 4900. The upgrade takes effect at block 5000." />
+  <title>Required update: 0.5.4 | Netlithic</title>
+  <meta name="description" content="Update to 0.5.4 before testnet block 4900. The new rules start at block 5000." />
   <link rel="canonical" href="https://netlithicchain.com/update/" />
   <meta property="og:title" content="Required network update | Netlithic" />
-  <meta property="og:description" content="Update to 0.5.0 before testnet block 4900. The upgrade takes effect at block 5000." />
+  <meta property="og:description" content="Update to 0.5.4 before testnet block 4900. The new rules start at block 5000." />
   <meta property="og:url" content="https://netlithicchain.com/update/" />
   <meta property="og:image" content="https://netlithicchain.com/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -938,27 +938,27 @@
     </div>
   </header>
   <main class="guide">
-<h1>Required network update: 0.5.0</h1>
+<h1>Required network update: 0.5.4</h1>
 <blockquote>
-<p><strong>Update to 0.5.0 before block 4900. The upgrade takes effect at block 5000.</strong></p>
-<p>From block 4900, 0.5.0 nodes stop syncing with older versions, so nodes that haven't updated by then fall off the network.</p>
+<p><strong>Update to 0.5.4 before block 4900. The new rules start at block 5000.</strong></p>
+<p>From block 4900, nodes stop talking to peers on older versions, so nodes that haven't updated by then fall off the network. At block 5000 the new difficulty rules start, and nodes still on 0.5.3 split off onto their own chain.</p>
 </blockquote>
 <h2>Why</h2>
-<p>This update strengthens Netlithic against attacks: it limits how far back the chain can be rewritten, makes contribution points harder to game, and protects nodes from being flooded with requests.</p>
+<p>From block 5000, difficulty is worked out once per block using exact whole-number maths over the last 60 blocks, so it stays steadier. Block headers are also checked more strictly from block 5000, and nodes get fairer connection limits and smoother mining and block relay. Blocks below 5000 are checked exactly as in 0.5.3, so nothing changes until block 5000.</p>
 <h2>How to update (running from code)</h2>
 <ol>
 <li>Stop your node.</li>
-<li>Run <code>git fetch --tags &amp;&amp; git checkout v0.5.0</code> (or download the release from <a href="https://github.com/Netlithicchain/netlithic-core/releases/tag/v0.5.0">https://github.com/Netlithicchain/netlithic-core/releases/tag/v0.5.0</a>).</li>
+<li>Run <code>git fetch --tags &amp;&amp; git checkout v0.5.4</code>. <!-- RELEASE_LINK --></li>
 <li>Run <code>pip install -r requirements.txt</code>.</li>
 <li>Keep your data folder.</li>
-<li>Use public peer addresses only. 0.5.0 skips local ones like <code>127.0.0.1</code> and <code>192.168.x.x</code>.</li>
+<li>Use public peer addresses only. 0.5.4 skips local ones like <code>127.0.0.1</code> and <code>192.168.x.x</code>.</li>
 <li>Start your node.</li>
 </ol>
 <h2>Check your version</h2>
-<p>Open <code>http://&lt;your-node&gt;:8000/status</code>. You should see <code>"version": "0.5.0"</code> and a height that matches the explorer (<a href="https://testnet.netlithicchain.com/explorer/">https://testnet.netlithicchain.com/explorer/</a>) and keeps rising.</p>
+<p>Open <code>http://&lt;your-node&gt;:8000/status</code>. You should see <code>"version": "0.5.4"</code> and a height that matches the explorer (<a href="https://testnet.netlithicchain.com/explorer/">https://testnet.netlithicchain.com/explorer/</a>) and keeps rising.</p>
 <p>If something goes wrong, the old version is safe to run until block 4900.</p>
 <h2>Desktop app</h2>
-<p>Desktop app 0.5.0: <span class="soon">coming soon</span></p>
+<p>Desktop app: <span class="soon">coming soon</span></p>
 <p>This is a test network, and test coins have no value.</p>
 </main>
   <footer>
